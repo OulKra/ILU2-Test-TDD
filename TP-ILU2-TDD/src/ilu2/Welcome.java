@@ -42,7 +42,7 @@ public class Welcome {
 				int tailleNomsCris = 0;
 
 				String name = "";
-				String resCri = "HELLO";
+				String resCri = "";
 
 				for (int i = 0; i < name_list.length; i++) 
 				{
@@ -56,7 +56,6 @@ public class Welcome {
 							nomsCris[tailleNomsCris] = new SimpleEntry<>(name_list[i], 1);
 							tailleNomsCris++;
 						}
-
 					}
 					else
 					{
@@ -74,27 +73,25 @@ public class Welcome {
 				
 				for (int i = 0; i < tailleNoms-1; i++) {
 					if(noms[i].getValue() != 1)
-						name += ", " + noms[i].getKey().substring(0, 1).toUpperCase() + noms[i].getKey().substring(1, noms[i].getKey().length()) + " (x"+ noms[i].getValue() + ")";
+						name += noms[i].getKey().substring(0, 1).toUpperCase() + noms[i].getKey().substring(1, noms[i].getKey().length()) + " (x"+ noms[i].getValue() + ")" + ", ";
 					else
-						name += ", " + noms[i].getKey().substring(0, 1).toUpperCase() + noms[i].getKey().substring(1, noms[i].getKey().length());
+						name += noms[i].getKey().substring(0, 1).toUpperCase() + noms[i].getKey().substring(1, noms[i].getKey().length()) + ", ";
 				}
 				
 				for (int i = 0; i < tailleNomsCris-1; i++) {
 					if(nomsCris[i].getValue() != 1)	
-						resCri += ", "+nomsCris[i].getKey() + " (x"+ noms[i].getValue() + ")";
+						resCri += nomsCris[i].getKey() + " (x"+ nomsCris[i].getValue() + ")" + ", ";
 					else
-						resCri += ", "+nomsCris[i].getKey();
+						resCri += nomsCris[i].getKey() + ", ";
 				}
-				
-				
 				
 				if(tailleNomsCris != 0)
 				{
 					if(tailleNomsCris > 1)
 						if(nomsCris[tailleNomsCris-1].getValue() != 1)	
-							resCri += " AND "+nomsCris[tailleNomsCris-1].getKey() + " (x"+ nomsCris[tailleNomsCris-1].getValue() + ")";
+							resCri = resCri.substring(0, resCri.length()-1) + " AND "+nomsCris[tailleNomsCris-1].getKey() + " (x"+ nomsCris[tailleNomsCris-1].getValue() + ")";
 						else
-							resCri += " AND "+nomsCris[tailleNomsCris-1].getKey() + " !";
+							resCri = resCri.substring(0, resCri.length()-2) + " AND "+nomsCris[tailleNomsCris-1].getKey() + " !";
 					else
 						if(nomsCris[tailleNomsCris-1].getValue() != 1)	
 							resCri += ", "+nomsCris[tailleNomsCris-1].getKey() + " (x"+ nomsCris[tailleNomsCris-1].getValue() + ")";
@@ -106,9 +103,9 @@ public class Welcome {
 				{
 					if(tailleNoms > 1)
 						if(noms[tailleNoms-1].getValue() != 1)	
-							name += " and " + noms[tailleNoms-1].getKey().substring(0, 1).toUpperCase() + noms[tailleNoms-1].getKey().substring(1, noms[tailleNoms-1].getKey().length()) + " (x"+ noms[tailleNoms-1].getValue() + ")"+ ".";
+							name = name.substring(0, name.length()-1) + " and " + noms[tailleNoms-1].getKey().substring(0, 1).toUpperCase() + noms[tailleNoms-1].getKey().substring(1, noms[tailleNoms-1].getKey().length()) + " (x"+ noms[tailleNoms-1].getValue() + ")"+ ".";
 						else
-							name += " and " + noms[tailleNoms-1].getKey().substring(0, 1).toUpperCase() + noms[tailleNoms-1].getKey().substring(1, noms[tailleNoms-1].getKey().length()) + ".";
+							name = name.substring(0, name.length()-2) + " and " + noms[tailleNoms-1].getKey().substring(0, 1).toUpperCase() + noms[tailleNoms-1].getKey().substring(1, noms[tailleNoms-1].getKey().length()) + ".";
 					else
 						if(noms[tailleNoms-1].getValue() != 1)	
 							name += ", " + noms[tailleNoms-1].getKey().substring(0, 1).toUpperCase() + noms[tailleNoms-1].getKey().substring(1, noms[tailleNoms-1].getKey().length())  + " (x"+ noms[tailleNoms-1].getValue() + ")" + ".";
@@ -117,14 +114,69 @@ public class Welcome {
 				}
 				else
 					name += ".";
+								
+				if(existe(noms, "Yoda") != -1)
+				{
+					if(existe(nomsCris, "YODA") != -1)
+					{
+						if(resCri.equals(""))
+							return name.substring(0, name.length()-1) + ", Hello";
+						else
+							return name.substring(0, name.length()-1) + ", Hello. AND " + resCri + " HELLO !";
+					}
+					else
+					{
+						if(resCri.equals(""))
+							return name.substring(0, name.length()-1) + ", Hello";
+						else
+							return name.substring(0, name.length()-1) + ", Hello. AND HELLO" + resCri.substring(1, resCri.length());
+					}
+					
+				}
+				else
+				{
+					if(resCri.startsWith(","))
+					{
+						resCri = resCri.substring(2);
+					}
+					
+					if(name.startsWith(","))
+					{
+						name = name.substring(2);
+					}
+					System.out.println("name  " + name);
+					if(existe(nomsCris, "YODA") != -1)
+					{
+						if(resCri.equals(""))
+						{
+							if(name.equals("."))
+								return "Hello " + name;
+							return "Hello, " + name;
+						}
+						else
+						{
+							if(name.equals("."))
+								return "Hello " + name +" AND " + resCri.substring(0, resCri.length()-2) + " HELLO !";
+							return "Hello, " + name +" AND " + resCri.substring(0, resCri.length()-2) + " HELLO !";
+						}
+					}
+					else
+					{
+						if(resCri.equals(""))
+						{
+							if(name.equals("."))
+								return "Hello " + name;
+							return "Hello, " + name;
+						}
+						else
+						{
+							if(name.equals("."))
+								return "Hello" + name + " AND HELLO, " + resCri;
+							return "Hello, " + name + " AND HELLO, " + resCri;
+						}
+					}
+				}
 
-				System.out.println(name);
-				System.out.println(resCri);
-				
-				
-				if(resCri.equals("HELLO"))
-					return "Hello" + name;
-				return "Hello" + name + " AND " + resCri;
 			}
 		}
 		catch (NullPointerException e){
