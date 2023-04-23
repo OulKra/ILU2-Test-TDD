@@ -7,19 +7,21 @@ public class Welcome {
 	{
 		try {
 			String[] name_list = input.split(",");
+			System.out.println(name_list.length);
+
 			if(name_list.length > 1)
-			{				
-				String name = name_list[0].substring(0, 1).toUpperCase() + name_list[0].substring(1, name_list[0].length());
+			{	
+				String name = "";
 				String resCri = "HELLO";
-				for (int i = 1; i < name_list.length; i++) {
+				for (int i = 0; i < name_list.length; i++) {
 					if(name_list[i].equals(name_list[i].toUpperCase()))
 						resCri += ", "+name_list[i];
 					else
 						name += (", " + name_list[i].substring(0, 1).toUpperCase() + name_list[i].substring(1, name_list[i].length()));
 				}
 				if(resCri.equals("HELLO"))
-					return "Hello, " + name;
-				return "Hello, " + name + ". AND " + resCri;
+					return "Hello" + name;
+				return "Hello" + name + ". AND " + resCri;
 			}
 		}
 		catch (NullPointerException e){
