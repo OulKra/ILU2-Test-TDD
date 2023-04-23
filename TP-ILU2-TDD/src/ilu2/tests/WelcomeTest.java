@@ -25,9 +25,9 @@ public class WelcomeTest {
 	@Test
 	public void testEX_3()
 	{
-		assertEquals(Welcome.welcome(""), "Hello, my friend");
-		assertEquals(Welcome.welcome("    "), "Hello, my friend");
-		assertEquals(Welcome.welcome(null), "Hello, my friend");
+		assertEquals(Welcome.welcome("JERRY"), "HELLO, JERRY !");
+		assertEquals(Welcome.welcome("J"), "HELLO, J !");
+
 	}
 	
 	@Test
