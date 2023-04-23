@@ -34,13 +34,12 @@ public class WelcomeTest {
 	public void testEX_4()
 	{
 		assertEquals(Welcome.welcome("bod,alice"), "Hello, Bod and Alice.");
-		assertEquals(Welcome.welcome("bod,alice,jean,charle,kevin"), "Hello, Bod, Alice, Jean, Charle and Kevin.");
 	}
 	
 	@Test
 	public void testEX_5()
 	{
-		assertEquals(Welcome.welcome("bod,alice,noe"), "Hello, Bod, Alice and Noe.");
+		assertEquals(Welcome.welcome("bod,alice,jean,charle,kevin"), "Hello, Bod, Alice, Jean, Charle and Kevin.");
 	}
 	
 	@Test
