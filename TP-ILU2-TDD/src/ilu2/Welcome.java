@@ -6,6 +6,10 @@ public class Welcome {
 
 	public static String welcome(String input)
 	{
+		if(input != null)
+		{
+			input = input.replaceAll("\\s", "");
+		}
 		try {
 			String[] name_list = input.split(",");
 
@@ -24,13 +28,11 @@ public class Welcome {
 					if(name_list[i].equals(name_list[i].toUpperCase()))
 					{
 						nomsCris[tailleNomsCris] = name_list[i];
-						System.out.println("nomsCris " + nomsCris[tailleNomsCris]);
 						tailleNomsCris++;
 					}
 					else
 					{
 						noms[tailleNoms]= name_list[i].substring(0, 1).toUpperCase() + name_list[i].substring(1, name_list[i].length());
-						System.out.println("noms " + noms[tailleNoms]);
 						tailleNoms++;
 					}
 				}
@@ -63,9 +65,6 @@ public class Welcome {
 				{
 					name += ".";
 				}
-					
-				System.out.println("name " + name);
-				System.out.println("resCri " + resCri);
 				
 				if(resCri.equals("HELLO"))
 					return "Hello" + name;
