@@ -1,5 +1,6 @@
 package ilu2;
 
+import java.util.Iterator;
 
 public class Welcome {
 
@@ -7,25 +8,72 @@ public class Welcome {
 	{
 		try {
 			String[] name_list = input.split(",");
-			System.out.println(name_list.length);
 
 			if(name_list.length > 1)
 			{	
+				String[] noms = new String[10];
+				String[] nomsCris = new String[10];
+				
+				int tailleNoms = 0;
+				int tailleNomsCris = 0;
+
 				String name = "";
 				String resCri = "HELLO";
-				for (int i = 0; i < name_list.length; i++) {
+				for (int i = 0; i < name_list.length; i++) 
+				{
 					if(name_list[i].equals(name_list[i].toUpperCase()))
-						resCri += ", "+name_list[i];
+					{
+						nomsCris[tailleNomsCris] = name_list[i];
+						System.out.println("nomsCris " + nomsCris[tailleNomsCris]);
+						tailleNomsCris++;
+					}
 					else
-						name += (", " + name_list[i].substring(0, 1).toUpperCase() + name_list[i].substring(1, name_list[i].length()));
+					{
+						noms[tailleNoms]= name_list[i].substring(0, 1).toUpperCase() + name_list[i].substring(1, name_list[i].length());
+						System.out.println("noms " + noms[tailleNoms]);
+						tailleNoms++;
+					}
 				}
+				
+				for (int i = 0; i < tailleNoms-1; i++) {
+					name += ", " + noms[i].substring(0, 1).toUpperCase() + noms[i].substring(1, noms[i].length());
+				}
+				
+				for (int i = 0; i < tailleNomsCris-1; i++) {
+					resCri += ", "+nomsCris[i];
+				}
+				
+				
+				if(tailleNomsCris != 0)
+				{
+					if(tailleNomsCris > 1)
+						resCri += " AND "+nomsCris[tailleNomsCris-1] + " !";
+					else
+						resCri += ", "+nomsCris[tailleNomsCris-1] + " !";
+				}
+				
+				if(tailleNoms != 0)
+				{
+					if(tailleNoms > 1)
+						name += " and " + noms[tailleNoms-1].substring(0, 1).toUpperCase() + noms[tailleNoms-1].substring(1, noms[tailleNoms-1].length()) + ".";
+					else
+						name += ", " + noms[tailleNoms-1].substring(0, 1).toUpperCase() + noms[tailleNoms-1].substring(1, noms[tailleNoms-1].length()) + ".";
+				}
+				else
+				{
+					name += ".";
+				}
+					
+				System.out.println("name " + name);
+				System.out.println("resCri " + resCri);
+				
 				if(resCri.equals("HELLO"))
 					return "Hello" + name;
-				return "Hello" + name + ". AND " + resCri;
+				return "Hello" + name + " AND " + resCri;
 			}
 		}
 		catch (NullPointerException e){
-			;
+			
 		}
 		
 		
