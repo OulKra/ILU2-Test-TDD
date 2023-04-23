@@ -69,7 +69,7 @@ public class WelcomeTest {
 	{
 		assertEquals(Welcome.welcome("bob, JERRY, amy, bob, JERRY, bob"), "Hello, Bob (x3) and Amy. AND HELLO, JERRY (x2)");
 	}
-	
+	   
 	@Test
 	public void testEX_10()
 	{
